@@ -10,7 +10,6 @@ def ler_transacoes(caminho):
 
 
 def descricao(t):
-    # Alguns bancos preenchem apenas "payee" ou deixam o memo vazio
     return (t.memo or t.payee or "SEM DESCRIÇÃO").strip()
 
 
