@@ -5,7 +5,6 @@ from ofxparse import OfxParser
 
 ARQUIVO = "extrato.ofx"
 
-# Ajuste os dados ou defina variáveis de ambiente (evita senha no GitHub)
 CONFIG = {
     "host": os.getenv("PG_HOST", "localhost"),
     "port": os.getenv("PG_PORT", "5432"),
@@ -55,8 +54,6 @@ def main():
                 data = t.date.date()
                 valor = t.amount
                 desc = (t.memo or t.payee or "SEM DESCRIÇÃO").strip()[:255]
-
-                # Bônus: evita gravar a mesma transação duas vezes
                 cur.execute(SQL_EXISTE, (data, valor, desc))
                 if cur.fetchone():
                     duplicadas += 1
